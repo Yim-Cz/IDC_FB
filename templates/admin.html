@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bandeja Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">📥 Mensajes Recibidos</h2>
+        <div class="text-end mb-3">
+            <a href="/logout" class="btn btn-outline-warning">Cerrar sesión</a>
+        </div>
+
+        {% for mensaje in mensajes %}
+            <div class="card bg-secondary text-light mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">📌 De: {{ mensaje.nombre }}</h5>
+                    <p class="card-text"><strong>Mensaje cifrado:</strong> {{ mensaje.mensaje }}</p>
+                    <details>
+                        <summary>🔓 Posibles descifrados:</summary>
+                        <ul>
+                            {% for intento in fuerza_bruta(mensaje.mensaje) %}
+                                <li>{{ intento }}</li>
+                            {% endfor %}
+                        </ul>
+                    </details>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+
